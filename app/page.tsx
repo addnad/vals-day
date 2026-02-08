@@ -65,6 +65,17 @@ export default function ValentinesPage() {
     left: Math.random() * 100,
   }))
 
+  // Handle raindrop animation and redirect
+  useEffect(() => {
+    if (showRaindrops) {
+      const timer = setTimeout(() => {
+        setShowRaindrops(false)
+        setStage('message')
+      }, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [showRaindrops])
+
   // Handle NO button movement
   const handleNoHover = () => {
     const randomX = (Math.random() - 0.5) * 200
@@ -82,8 +93,6 @@ export default function ValentinesPage() {
       return () => clearTimeout(timer)
     }
   }, [videoEnded, stage, currentSlide])
-
-  const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1)
     }

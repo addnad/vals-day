@@ -9,25 +9,25 @@ export default function ValentinesPage() {
 
   const slides = [
     {
-      image: '/images/media-201-20image.jpg',
-      video: '/images/media-201-20video.mp4',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%201%20image-qS9ThpB9AaKOlkhzEuW0sy5hg1Rmya.jpg',
+      video: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%201%20video-RLHUSaHSFPJaoq48GcfQIbxD3et3p0.mp4',
       text: "It started with a simple 'do you also want a nose mask' at that noisy convocation of your mom's 😂",
     },
     {
-      image: '/images/media-202-20image.jpg',
-      video: '/images/media-202-20video.mov',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%202%20image-g2ea81O8ZqEBdMr5klIk8v3IlyEYgd.jpg',
+      video: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%202%20video-Q92Lqt2tPrr0a2vZXIo4e21h7gizWX.mov',
       text: 'Cherished that day I surprised you at your school with myself as the present 🥹☺️. One of my favorite moments and your expression still lives rent free in my head 😂😂. We then went out to spend quality time at metro foods...',
     },
     {
-      image: '/images/media-203-20image.jpg',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%203%20image-yma5qpHj3a7kY03V2crVUuSViCXsSl.jpg',
       text: 'Picture this: me, lost in thought until your smile lit up the room. Now every page of my life has your name written in it. Can\'t wait to keep writing our story together Ife mi ❤️🙈',
     },
     {
-      image: '/images/media-204.jpeg',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%204.JPG-ISN56ibUpu0fSoCtcHeaUpfPi43WLj.jpeg',
       text: 'We met by chance, but chose each other every single day after. Through distance, outages, network jams and quiet mornings our love grew roots. Here\'s to forever being tangled up in you. 🌿💞',
     },
     {
-      image: '/images/media-205.jpeg',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%205.JPG-1GxsKW8RF3rnlRafNopP8mNVzLu3GD.jpeg',
       text: 'From awkward first dates nerves to every silly moment, we built this unbreakable us. Thank you for turning \'what if\' into \'always\' my darling 💃❤️',
     },
   ]
@@ -40,6 +40,14 @@ export default function ValentinesPage() {
     }))
     setHearts(newHearts)
   }, [])
+
+  // Auto-advance slides
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [slides.length])
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -110,15 +118,17 @@ export default function ValentinesPage() {
               {slides[currentSlide].video && (
                 <video
                   key={`video-${currentSlide}`}
-                  controls
+                  autoPlay
+                  muted
+                  loop
                   className="w-full h-full object-cover"
                 >
-                  <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%201%20video-RLHUSaHSFPJaoq48GcfQIbxD3et3p0.mp4" type="video/mp4" />
+                  <source src={slides[currentSlide].video} type="video/mp4" />
                 </video>
               )}
-              {slides[currentSlide].image && !slides[currentSlide].video && (
+              {slides[currentSlide].image && (
                 <img
-                  src={slides[currentSlide].image}
+                  src={slides[currentSlide].image || "/placeholder.svg"}
                   alt={`Memory ${currentSlide + 1}`}
                   className="w-full h-full object-cover"
                 />

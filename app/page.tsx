@@ -21,6 +21,21 @@ export default function ValentinesPage() {
       image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%201%20image-W22gaJKQ0fBdzzx7fCObkWF2fKkR1d.jpg',
       text: "It started with a simple 'do you also want a nose mask' at that noisy convocation of your mom's 😂",
     },
+    {
+      type: 'image',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%202%20image-ZnjiccFfG4wkqzYOCbOJHd7tME97yB.jpg',
+      text: "Cherished that day I surprised you at your school with myself as the present 🥹☺️. One of my favorite moment and your expression still lives rent free in my head 😂😂. We then went out to spend quality time at metro foods...",
+    },
+    {
+      type: 'video',
+      video: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%202%20video-D5i8mByQsUuPbZzJRj0D8FSWipySOz.mov',
+      text: "Cherished that day I surprised you at your school with myself as the present 🥹☺️. One of my favorite moment and your expression still lives rent free in my head 😂😂. We then went out to spend quality time at metro foods...",
+    },
+    {
+      type: 'video',
+      video: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%202.1-t8bM5Avyx35OZeiCT028jKtmvTGKRQ.mov',
+      text: "Cherished that day I surprised you at your school with myself as the present 🥹☺️. One of my favorite moment and your expression still lives rent free in my head 😂😂. We then went out to spend quality time at metro foods...",
+    },
   ]
 
   const hearts = Array.from({ length: 8 }).map((_, i) => ({
@@ -265,10 +280,7 @@ export default function ValentinesPage() {
             ))}
           </div>
 
-          {/* Info text */}
-          <p className="text-center text-gray-600 font-poppins text-sm">
-            Slide {currentSlide + 1} of {slides.length}
-          </p>
+
         </div>
       </div>
     )

@@ -203,14 +203,16 @@ export default function ValentinesPage() {
           {/* Media display */}
           <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden aspect-video mb-8">
             <div className="relative w-full h-full">
-              {currentMedia.type === 'video' && (
+            {currentMedia.type === 'video' && (
                 <video
                   key={`video-${currentSlide}`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover bg-black"
                   controls
                   onEnded={() => setVideoEnded(true)}
+                  crossOrigin="anonymous"
                 >
                   <source src={currentMedia.video} type="video/mp4" />
+                  Your browser does not support the video tag.
                 </video>
               )}
 

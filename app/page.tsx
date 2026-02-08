@@ -36,6 +36,11 @@ export default function ValentinesPage() {
       video: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%202.1-t8bM5Avyx35OZeiCT028jKtmvTGKRQ.mov',
       text: "Cherished that day I surprised you at your school with myself as the present 🥹☺️. One of my favorite moment and your expression still lives rent free in my head 😂😂. We then went out to spend quality time at metro foods...",
     },
+    {
+      type: 'image',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%203%20image-caizc6cdEuBmGvZ8OV1nRZLznJcUk5.jpg',
+      text: "now picture this: me, lost in thought until your smile lit up the room. Now every page of my life has your name written in it. Can't wait to keep writing our story together Ife mi ❤️🙈",
+    },
   ]
 
   const hearts = Array.from({ length: 8 }).map((_, i) => ({

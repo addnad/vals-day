@@ -5,10 +5,11 @@ import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 
 export default function ValentinesPage() {
-  const [stage, setStage] = useState<'prompt' | 'message' | 'carousel' | 'emoji'>('prompt')
+  const [stage, setStage] = useState<'prompt' | 'message' | 'carousel'>('prompt')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
   const [videoEnded, setVideoEnded] = useState(false)
+  const [showRaindrops, setShowRaindrops] = useState(false)
   const noButtonRef = useRef<HTMLButtonElement>(null)
 
   const slides = [
@@ -98,44 +99,11 @@ export default function ValentinesPage() {
     setCurrentSlide(index)
   }
 
-  // Auto-redirect from emoji stage to message after 2 seconds
-  useEffect(() => {
-    if (stage === 'emoji') {
-      const timer = setTimeout(() => {
-        setStage('message')
-      }, 2000)
-      return () => clearTimeout(timer)
-    }
-  }, [stage])
-
-  // Render emoji stage with raindrop hearts
-  if (stage === 'emoji') {
-    return (
-      <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-orange-50 to-pink-200 overflow-hidden">
-        <div className="relative z-10">
-          {/* Raindrop hearts */}
-          {Array.from({ length: 15 }).map((_, i) => (
-            <div
-              key={i}
-              className="fixed text-3xl animate-raindrop pointer-events-none"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 0.5}s`,
-              }}
-            >
-              💕
-            </div>
-          ))}
-        </div>
-      </div>
-    )
-  }
-
   // Render prompt stage
   if (stage === 'prompt') {
     return (
       <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-orange-50 to-pink-200 overflow-hidden">
-        {/* Floating hearts */}
+        {/* Falling hearts */}
         <div className="fixed inset-0 pointer-events-none">
           {Array.from({ length: 5 }).map((_, i) => (
             <div
@@ -153,6 +121,24 @@ export default function ValentinesPage() {
           ))}
         </div>
 
+        {/* Raindrop hearts overlay - shows after clicking Yes */}
+        {showRaindrops && (
+          <div className="fixed inset-0 pointer-events-none z-50">
+            {Array.from({ length: 15 }).map((_, i) => (
+              <div
+                key={i}
+                className="fixed text-3xl animate-raindrop"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 0.5}s`,
+                }}
+              >
+                💕
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="relative z-10 text-center px-4">
           <h1 className="font-playfair text-5xl md:text-6xl font-bold text-rose-700 mb-8">
             Will you be my Valentine?
@@ -161,7 +147,7 @@ export default function ValentinesPage() {
           <div className="flex gap-8 justify-center items-center relative">
             {/* YES Button */}
             <button
-              onClick={() => setStage('emoji')}
+              onClick={() => setShowRaindrops(true)}
               className="px-8 py-3 bg-rose-500 text-white text-xl font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Yes ❤️

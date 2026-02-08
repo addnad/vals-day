@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
+import Link from 'next/link'
 
 export default function ValentinesPage() {
   const [stage, setStage] = useState<'prompt' | 'message' | 'carousel'>('prompt')
@@ -290,6 +291,17 @@ export default function ValentinesPage() {
               {currentMedia.text}
             </p>
           </div>
+
+          {/* CTA Button to special page - only on last slide */}
+          {currentSlide === slides.length - 1 && (
+            <div className="flex justify-center mt-8">
+              <Link href="/special">
+                <button className="px-8 py-3 bg-rose-500 text-white font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                  Oya, come see this 😂😂
+                </button>
+              </Link>
+            </div>
+          )}
 
           {/* Slide indicators */}
           <div className="flex justify-center gap-2 mb-8">

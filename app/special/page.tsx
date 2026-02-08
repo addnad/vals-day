@@ -83,11 +83,6 @@ export default function SpecialPage() {
           ))}
         </div>
 
-        {/* Auto-play toggle info */}
-        <p className="text-center text-gray-500 text-sm font-poppins mt-6">
-          Images change every 5 seconds. Click dots to control.
-        </p>
-
         {/* Back button */}
         <div className="flex justify-center mt-12">
           <a href="/">

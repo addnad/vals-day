@@ -5,7 +5,7 @@ import { ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import Link from 'next/link'
 
 export default function ValentinesPage() {
-  const [stage, setStage] = useState<'prompt' | 'message' | 'carousel'>('prompt')
+  const [stage, setStage] = useState<'prompt' | 'message' | 'carousel' | 'emoji'>('prompt')
   const [currentSlide, setCurrentSlide] = useState(0)
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
   const [videoEnded, setVideoEnded] = useState(false)
@@ -98,6 +98,39 @@ export default function ValentinesPage() {
     setCurrentSlide(index)
   }
 
+  // Auto-redirect from emoji stage to message after 2 seconds
+  useEffect(() => {
+    if (stage === 'emoji') {
+      const timer = setTimeout(() => {
+        setStage('message')
+      }, 2000)
+      return () => clearTimeout(timer)
+    }
+  }, [stage])
+
+  // Render emoji stage with raindrop hearts
+  if (stage === 'emoji') {
+    return (
+      <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-orange-50 to-pink-200 overflow-hidden">
+        <div className="relative z-10">
+          {/* Raindrop hearts */}
+          {Array.from({ length: 15 }).map((_, i) => (
+            <div
+              key={i}
+              className="fixed text-3xl animate-raindrop pointer-events-none"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 0.5}s`,
+              }}
+            >
+              💕
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   // Render prompt stage
   if (stage === 'prompt') {
     return (
@@ -128,7 +161,7 @@ export default function ValentinesPage() {
           <div className="flex gap-8 justify-center items-center relative">
             {/* YES Button */}
             <button
-              onClick={() => setStage('message')}
+              onClick={() => setStage('emoji')}
               className="px-8 py-3 bg-rose-500 text-white text-xl font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               Yes ❤️
@@ -149,7 +182,7 @@ export default function ValentinesPage() {
           </div>
 
           <p className="mt-12 text-gray-600 text-lg font-poppins">
-            (The "No" option isn't really an option, darling 😉)
+            The "No" option isn't really an option, darling 😉
           </p>
         </div>
       </div>
@@ -296,7 +329,7 @@ export default function ValentinesPage() {
           {currentSlide === slides.length - 1 && (
             <div className="flex justify-center mt-8">
               <Link href="/special">
-                <button className="px-8 py-3 bg-rose-500 text-white font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                <button className="px-8 py-3 bg-rose-500 text-white font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 animate-bounce-vertical">
                   Oya, come see this 😂😂
                 </button>
               </Link>

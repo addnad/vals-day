@@ -83,11 +83,16 @@ export default function SpecialPage() {
           ))}
         </div>
 
-        {/* Back button */}
-        <div className="flex justify-center mt-12">
+        {/* Back button and Take a look button */}
+        <div className="flex justify-center gap-4 mt-12 flex-wrap">
           <a href="/">
             <button className="px-8 py-3 bg-gray-500 text-white font-semibold rounded-full hover:bg-gray-600 transition-all duration-200 shadow-lg hover:shadow-xl">
               Back to memories
+            </button>
+          </a>
+          <a href="/countdown">
+            <button className="px-8 py-3 bg-rose-500 text-white font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl">
+              Take a look
             </button>
           </a>
         </div>

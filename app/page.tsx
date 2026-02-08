@@ -82,11 +82,15 @@ export default function ValentinesPage() {
   }, [videoEnded, stage, currentSlide])
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
+    if (currentSlide < slides.length - 1) {
+      setCurrentSlide((prev) => prev + 1)
+    }
   }
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
+    if (currentSlide > 0) {
+      setCurrentSlide((prev) => prev - 1)
+    }
   }
 
   const goToSlide = (index: number) => {
@@ -236,9 +240,9 @@ export default function ValentinesPage() {
 
         <div className="relative z-10 w-full max-w-3xl">
           {/* Media display */}
-          <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden aspect-video mb-8">
+          <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden aspect-video">
             <div className="relative w-full h-full">
-            {currentMedia.type === 'video' && (
+              {currentMedia.type === 'video' && (
                 <video
                   key={`video-${currentSlide}`}
                   className="w-full h-full object-cover bg-black"
@@ -259,13 +263,6 @@ export default function ValentinesPage() {
                   className="w-full h-full object-cover"
                 />
               )}
-
-              {/* Text overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                <p className="text-white text-lg p-6 font-poppins font-medium text-balance">
-                  {currentMedia.text}
-                </p>
-              </div>
             </div>
 
             {/* Navigation arrows */}
@@ -276,13 +273,22 @@ export default function ValentinesPage() {
             >
               <ChevronLeft className="w-6 h-6 text-rose-600" />
             </button>
-            <button
-              onClick={nextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-2 transition-all shadow-lg"
-              aria-label="Next slide"
-            >
-              <ChevronRight className="w-6 h-6 text-rose-600" />
-            </button>
+            {currentSlide < slides.length - 1 && (
+              <button
+                onClick={nextSlide}
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white rounded-full p-2 transition-all shadow-lg"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-6 h-6 text-rose-600" />
+              </button>
+            )}
+          </div>
+
+          {/* Text display below media */}
+          <div className="mt-6 text-center">
+            <p className="text-lg text-gray-700 leading-relaxed font-poppins">
+              {currentMedia.text}
+            </p>
           </div>
 
           {/* Slide indicators */}

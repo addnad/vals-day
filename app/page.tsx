@@ -41,6 +41,16 @@ export default function ValentinesPage() {
       image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%203%20image-caizc6cdEuBmGvZ8OV1nRZLznJcUk5.jpg',
       text: "now picture this: me, lost in thought until your smile lit up the room. Now every page of my life has your name written in it. Can't wait to keep writing our story together Ife mi ❤️🙈",
     },
+    {
+      type: 'image',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%204.JPG-70jeoOZlKkCKtLMj4J3toXTEWfwFpE.jpeg',
+      text: "We met by chance, but chose each other every single day after. Through distance outages, network jams and quiet mornings our love grew roots. Here's to forever being tangled up in you. 🌿💞",
+    },
+    {
+      type: 'image',
+      image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%204.1.JPG-oNVm2HF8YR78rXcf296jzlzO2oAVyS.jpeg',
+      text: "We met by chance, but chose each other every single day after. Through distance outages, network jams and quiet mornings our love grew roots. Here's to forever being tangled up in you. 🌿💞",
+    },
   ]
 
   const hearts = Array.from({ length: 8 }).map((_, i) => ({

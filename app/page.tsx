@@ -248,6 +248,7 @@ export default function ValentinesPage() {
 
               {currentMedia.type === 'image' && (
                 <img
+                  key={`image-${currentSlide}`}
                   src={currentMedia.image || "/placeholder.svg"}
                   alt={`Memory ${currentSlide + 1}`}
                   className="w-full h-full object-cover"

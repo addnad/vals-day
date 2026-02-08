@@ -51,6 +51,11 @@ export default function ValentinesPage() {
       image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Media%204.1.JPG-oNVm2HF8YR78rXcf296jzlzO2oAVyS.jpeg',
       text: "We met by chance, but chose each other every single day after. Through distance outages, network jams and quiet mornings our love grew roots. Here's to forever being tangled up in you. 🌿💞",
     },
+    {
+      type: 'video',
+      video: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/VIDEO-2025-12-14-18-38-32-cuocrwtKQdv4hGrBQ8YBZYiVKilYH9.mp4',
+      text: "From awkward first dates nerves to every silly moment, built this unbreakable us. Thank you for turning 'what if' into 'always' my darling 💃❤️",
+    },
   ]
 
   const hearts = Array.from({ length: 8 }).map((_, i) => ({

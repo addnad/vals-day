@@ -93,6 +93,8 @@ export default function ValentinesPage() {
       return () => clearTimeout(timer)
     }
   }, [videoEnded, stage, currentSlide])
+
+  const nextSlide = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1)
     }

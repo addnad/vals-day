@@ -83,8 +83,13 @@ export default function SpecialPage() {
           ))}
         </div>
 
-        {/* Back button */}
-        <div className="flex justify-center mt-12">
+        {/* Buttons */}
+        <div className="flex justify-center gap-4 mt-12 flex-wrap">
+          <a href="/countdown">
+            <button className="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-500 text-white font-semibold rounded-full hover:from-rose-600 hover:to-pink-600 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105">
+              Take a look 💕
+            </button>
+          </a>
           <a href="/">
             <button className="px-8 py-3 bg-gray-500 text-white font-semibold rounded-full hover:bg-gray-600 transition-all duration-200 shadow-lg hover:shadow-xl">
               Back to memories

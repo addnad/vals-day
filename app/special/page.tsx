@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 export default function SpecialPage() {
   const [imageIndex, setImageIndex] = useState(0)
   const [isAnimating, setIsAnimating] = useState(true)
+  const [isClient, setIsClient] = useState(false)
 
   const images = [
     'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/IMG_9255.PNG-yKvodEXiVCkUOs53DtKvATxzmUdly5.png',
@@ -12,6 +13,10 @@ export default function SpecialPage() {
   ]
 
   // Cycle through images every 5 seconds
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   useEffect(() => {
     if (!isAnimating) return
 
@@ -24,23 +29,25 @@ export default function SpecialPage() {
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 via-orange-50 to-pink-200 px-4 py-8 overflow-hidden">
-      {/* Falling hearts background */}
-      <div className="fixed inset-0 pointer-events-none">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-fall"
-            style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.7}s`,
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255, 255, 255, 0.3)">
-              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-            </svg>
-          </div>
-        ))}
-      </div>
+      {/* Falling hearts background - only render on client */}
+      {isClient && (
+        <div className="fixed inset-0 pointer-events-none">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute animate-fall"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${i * 0.7}s`,
+              }}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255, 255, 255, 0.3)">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="relative z-10 max-w-2xl w-full">
         {/* Animated image container */}
@@ -83,11 +90,16 @@ export default function SpecialPage() {
           ))}
         </div>
 
-        {/* Back button */}
-        <div className="flex justify-center mt-12">
+        {/* Back button and Take a look button */}
+        <div className="flex justify-center gap-4 mt-12 flex-wrap">
           <a href="/">
             <button className="px-8 py-3 bg-gray-500 text-white font-semibold rounded-full hover:bg-gray-600 transition-all duration-200 shadow-lg hover:shadow-xl">
               Back to memories
+            </button>
+          </a>
+          <a href="/countdown">
+            <button className="px-8 py-3 bg-rose-500 text-white font-semibold rounded-full hover:bg-rose-600 transition-all duration-200 shadow-lg hover:shadow-xl">
+              Take a look
             </button>
           </a>
         </div>

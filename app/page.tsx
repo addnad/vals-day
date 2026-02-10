@@ -10,6 +10,7 @@ export default function ValentinesPage() {
   const [noPosition, setNoPosition] = useState({ x: 0, y: 0 })
   const [videoEnded, setVideoEnded] = useState(false)
   const [showRaindrops, setShowRaindrops] = useState(false)
+  const [isClient, setIsClient] = useState(false)
   const noButtonRef = useRef<HTMLButtonElement>(null)
 
   const slides = [
@@ -65,6 +66,11 @@ export default function ValentinesPage() {
     left: Math.random() * 100,
   }))
 
+  // Mark as client-side to enable random generation
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   // Handle raindrop animation and redirect
   useEffect(() => {
     if (showRaindrops) {
@@ -114,26 +120,30 @@ export default function ValentinesPage() {
   if (stage === 'prompt') {
     return (
       <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 via-orange-50 to-pink-200 overflow-hidden">
-        {/* Falling hearts */}
-        <div className="fixed inset-0 pointer-events-none">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute animate-fall"
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.7}s`,
-              }}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255, 255, 255, 0.4)">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-            </div>
+        {/* Falling hearts - only render on client */}
+        {isClient && (
+          <div className="fixed inset-0 pointer-events-none">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className="absolute animate-fall"
+                style={{
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${i * 0.7}s`,
+                }}
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="rgba(255, 255, 255, 0.4)">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
+            ))}
+          </div>
+        )}
           ))}
         </div>
 
         {/* Raindrop hearts overlay - shows after clicking Yes */}
-        {showRaindrops && (
+        {isClient && showRaindrops && (
           <div className="fixed inset-0 pointer-events-none z-50">
             {Array.from({ length: 15 }).map((_, i) => (
               <div
